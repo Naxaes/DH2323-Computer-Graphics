@@ -115,7 +115,7 @@ void UpdateStarField(std::vector<vec3>& stars, vec3 velocity) {
     t = t2;
     for (int i = 0; i < stars.size(); ++i) {
 
-        stars[i] += stars[i] - (velocity * dt);
+        stars[i] = stars[i] - (velocity * dt);
 
         if (stars[i].z <= 0)
             stars[i].z += 1;
