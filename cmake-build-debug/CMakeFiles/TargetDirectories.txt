@@ -1,0 +1,8 @@
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab1/CMakeFiles/rebuild_cache.dir
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab1/CMakeFiles/edit_cache.dir
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab1/CMakeFiles/FirstLab.dir
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab2/CMakeFiles/rebuild_cache.dir
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab2/CMakeFiles/edit_cache.dir
+/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab2/CMakeFiles/SecondLab.dir

@@ -5,6 +5,8 @@ project ( FirstLab )
 
 add_executable( FirstLab skeleton.cpp)
 
+set(CMAKE_CXX_FLAGS "-Wall -O2")
+
 find_package (SDL)
 
 if ( NOT SDL_FOUND )

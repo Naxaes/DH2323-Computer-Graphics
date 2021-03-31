@@ -11,12 +11,14 @@ using glm::mat3;
 // ----------------------------------------------------------------------------
 // GLOBAL VARIABLES
 
-const int SCREEN_WIDTH = 500;
-const int SCREEN_HEIGHT = 500;
+const int SCREEN_WIDTH  = 100;
+const int SCREEN_HEIGHT = 100;
 SDL_Surface* screen;
 int t;
 
 vector<Triangle> triangles;
+
+float yaw = 0.0f;
 
 // ----------------------------------------------------------------------------
 // STRUCTS
@@ -28,29 +30,65 @@ struct Intersection
 	int triangleIndex;
 };
 
-Intersection closestIntersection;
 
 // ----------------------------------------------------------------------------
 // FUNCTIONS
 
 void Update();
-void Draw();
+void Draw(vec3 cameraPos);
 bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles, Intersection& closestIntersection);
 
 int main(int argc, char* argv[])
 {
+    triangles = LoadTestModel();
+
 	screen = InitializeSDL(SCREEN_WIDTH, SCREEN_HEIGHT);
 	t = SDL_GetTicks();	// Set start value for timer.
 
+    Uint8* keystate = SDL_GetKeyState(nullptr);
 
+    /*
+    mat3 rotation = mat3{
+        vec3{ cos(yaw), -sin(yaw), 0  },
+        vec3{ sin(yaw),  cos(yaw), 0  },
+        vec3{    0,         0,     1  },
+    };
 
+    auto R = rotation;
+    vec3 right   ( R[0][0], R[0][1], R[0][2] );
+    vec3 down    ( R[1][0], R[1][1], R[1][2] );
+    vec3 forward ( R[2][0], R[2][1], R[2][2] );
+    */
+
+    vec3 cameraPos(0.0f, 0.0f, 2.0f);
 	while (NoQuitMessageSDL())
 	{
+        if (keystate[SDLK_UP])
+        {
+            // Move camera forward
+            cameraPos.z -= 0.1f;
+        }
+        if (keystate[SDLK_DOWN])
+        {
+            // Move camera backward
+            cameraPos.z += 0.1f;
+        }
+        if (keystate[SDLK_LEFT])
+        {
+            // Move camera to the left
+            cameraPos.x -= 0.1f;
+        }
+        if (keystate[SDLK_RIGHT])
+        {
+            // Move camera to the right
+            cameraPos.x += 0.1f;
+        }
+
 		Update();
-		Draw();
+		Draw(cameraPos);
 	}
 
-	SDL_SaveBMP(screen, "screenshot.bmp");
+	SDL_SaveBMP(screen, "../../Lab2/screenshot" __TIME__ ".bmp");
 	return 0;
 }
 
@@ -63,17 +101,31 @@ void Update()
 	cout << "Render time: " << dt << " ms." << endl;
 }
 
-void Draw()
+void Draw(vec3 cameraPos)
 {
 	if (SDL_MUSTLOCK(screen))
 		SDL_LockSurface(screen);
+
+    auto W = float(SCREEN_WIDTH);
+    auto H = float(SCREEN_HEIGHT);
+
+    float F = H / 2.0f;
+    Intersection closestIntersection;
 
 	for (int y = 0; y < SCREEN_HEIGHT; ++y)
 	{
 		for (int x = 0; x < SCREEN_WIDTH; ++x)
 		{
-			vec3 color(1, 0.5, 0.5);
-			PutPixelSDL(screen, x, y, color);
+            auto direction = glm::normalize(vec3(x - W/2.0, y - H/2.0, -F));
+            if (ClosestIntersection(cameraPos, direction, triangles, closestIntersection))
+            {
+                auto triangle = triangles[closestIntersection.triangleIndex];
+                PutPixelSDL(screen, x, y, triangle.color);
+            }
+            else
+            {
+                PutPixelSDL(screen, x, y, vec3(0.0f, 0.0f, 0.0f));
+            }
 		}
 	}
 
@@ -109,11 +161,12 @@ bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles
 		v = x[2];
 
 		if (tray >= 0) {
-			if (u > 0) {
-				if (v > 0) {
-					if (u + v < 1) {
-						vec3 pos = v0 + u * e1 + v * e2; //Could use other ways to calculate??
-						float dis = glm::length(pos - s); //Could use other ways to calculate??
+			if (u >= 0) {
+				if (v >= 0) {
+					if (u + v <= 1) {
+					    vec3 pos = start + dir * tray;
+						// vec3 pos = v0 + u * e1 + v * e2; //Could use other ways to calculate??
+						float dis = tray; // glm::length(pos - s); //Could use other ways to calculate??
 						if (dis < m) {
 							m = dis;
 							closestIntersection.position = pos;
