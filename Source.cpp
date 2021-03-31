@@ -114,10 +114,12 @@ bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles
 					if (u + v < 1) {
 						vec3 pos = v0 + u * e1 + v * e2; //Could use other ways to calculate??
 						float dis = glm::length(pos - s); //Could use other ways to calculate??
-						closestIntersection.position = pos;
-						closestIntersection.distance = dis;
-						closestIntersection.triangleIndex = i;
-						return true;
+						if (dis < m) {
+							m = dis;
+							closestIntersection.position = pos;
+							closestIntersection.distance = dis;
+							closestIntersection.triangleIndex = i;
+						}
 					}
 				}
 			}
@@ -125,5 +127,10 @@ bool ClosestIntersection(vec3 start, vec3 dir, const vector<Triangle>& triangles
 	}
 	
 
-	return false;
+	if (m < std::numeric_limits<float>::max()) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
