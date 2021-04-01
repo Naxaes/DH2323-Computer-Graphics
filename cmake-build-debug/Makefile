@@ -76,6 +76,52 @@ CMAKE_BINARY_DIR = /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/c
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Devel\" \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -131,30 +177,256 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named FirstLab
+# Target rules for targets named test1
 
 # Build rule for target.
-FirstLab: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FirstLab
-.PHONY : FirstLab
+test1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test1
+.PHONY : test1
 
 # fast build rule for target.
-FirstLab/fast:
-	$(MAKE) $(MAKESILENT) -f Lab1/CMakeFiles/FirstLab.dir/build.make Lab1/CMakeFiles/FirstLab.dir/build
-.PHONY : FirstLab/fast
+test1/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/build
+.PHONY : test1/fast
 
 #=============================================================================
-# Target rules for targets named SecondLab
+# Target rules for targets named Lab2
 
 # Build rule for target.
-SecondLab: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SecondLab
-.PHONY : SecondLab
+Lab2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Lab2
+.PHONY : Lab2
 
 # fast build rule for target.
-SecondLab/fast:
-	$(MAKE) $(MAKESILENT) -f Lab2/CMakeFiles/SecondLab.dir/build.make Lab2/CMakeFiles/SecondLab.dir/build
-.PHONY : SecondLab/fast
+Lab2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/build
+.PHONY : Lab2/fast
+
+#=============================================================================
+# Target rules for targets named other
+
+# Build rule for target.
+other: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 other
+.PHONY : other
+
+# fast build rule for target.
+other/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/other.dir/build.make CMakeFiles/other.dir/build
+.PHONY : other/fast
+
+#=============================================================================
+# Target rules for targets named Lab3
+
+# Build rule for target.
+Lab3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Lab3
+.PHONY : Lab3
+
+# fast build rule for target.
+Lab3/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab3.dir/build.make CMakeFiles/Lab3.dir/build
+.PHONY : Lab3/fast
+
+#=============================================================================
+# Target rules for targets named Lab1
+
+# Build rule for target.
+Lab1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Lab1
+.PHONY : Lab1
+
+# fast build rule for target.
+Lab1/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab1.dir/build.make CMakeFiles/Lab1.dir/build
+.PHONY : Lab1/fast
+
+#=============================================================================
+# Target rules for targets named uninstall
+
+# Build rule for target.
+uninstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uninstall
+.PHONY : uninstall
+
+# fast build rule for target.
+uninstall/fast:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/build
+.PHONY : uninstall/fast
+
+#=============================================================================
+# Target rules for targets named SDL2
+
+# Build rule for target.
+SDL2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL2
+.PHONY : SDL2
+
+# fast build rule for target.
+SDL2/fast:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/build
+.PHONY : SDL2/fast
+
+#=============================================================================
+# Target rules for targets named SDL2-static
+
+# Build rule for target.
+SDL2-static: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL2-static
+.PHONY : SDL2-static
+
+# fast build rule for target.
+SDL2-static/fast:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/build
+.PHONY : SDL2-static/fast
+
+#=============================================================================
+# Target rules for targets named SDL2main
+
+# Build rule for target.
+SDL2main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SDL2main
+.PHONY : SDL2main
+
+# fast build rule for target.
+SDL2main/fast:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/build
+.PHONY : SDL2main/fast
+
+Lab1/main.o: Lab1/main.cpp.o
+
+.PHONY : Lab1/main.o
+
+# target to build an object file
+Lab1/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab1.dir/build.make CMakeFiles/Lab1.dir/Lab1/main.cpp.o
+.PHONY : Lab1/main.cpp.o
+
+Lab1/main.i: Lab1/main.cpp.i
+
+.PHONY : Lab1/main.i
+
+# target to preprocess a source file
+Lab1/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab1.dir/build.make CMakeFiles/Lab1.dir/Lab1/main.cpp.i
+.PHONY : Lab1/main.cpp.i
+
+Lab1/main.s: Lab1/main.cpp.s
+
+.PHONY : Lab1/main.s
+
+# target to generate assembly for a file
+Lab1/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab1.dir/build.make CMakeFiles/Lab1.dir/Lab1/main.cpp.s
+.PHONY : Lab1/main.cpp.s
+
+Lab2/main.o: Lab2/main.cpp.o
+
+.PHONY : Lab2/main.o
+
+# target to build an object file
+Lab2/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/Lab2/main.cpp.o
+.PHONY : Lab2/main.cpp.o
+
+Lab2/main.i: Lab2/main.cpp.i
+
+.PHONY : Lab2/main.i
+
+# target to preprocess a source file
+Lab2/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/Lab2/main.cpp.i
+.PHONY : Lab2/main.cpp.i
+
+Lab2/main.s: Lab2/main.cpp.s
+
+.PHONY : Lab2/main.s
+
+# target to generate assembly for a file
+Lab2/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/Lab2/main.cpp.s
+.PHONY : Lab2/main.cpp.s
+
+Lab3/main.o: Lab3/main.cpp.o
+
+.PHONY : Lab3/main.o
+
+# target to build an object file
+Lab3/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab3.dir/build.make CMakeFiles/Lab3.dir/Lab3/main.cpp.o
+.PHONY : Lab3/main.cpp.o
+
+Lab3/main.i: Lab3/main.cpp.i
+
+.PHONY : Lab3/main.i
+
+# target to preprocess a source file
+Lab3/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab3.dir/build.make CMakeFiles/Lab3.dir/Lab3/main.cpp.i
+.PHONY : Lab3/main.cpp.i
+
+Lab3/main.s: Lab3/main.cpp.s
+
+.PHONY : Lab3/main.s
+
+# target to generate assembly for a file
+Lab3/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab3.dir/build.make CMakeFiles/Lab3.dir/Lab3/main.cpp.s
+.PHONY : Lab3/main.cpp.s
+
+tests/other.o: tests/other.cpp.o
+
+.PHONY : tests/other.o
+
+# target to build an object file
+tests/other.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/other.dir/build.make CMakeFiles/other.dir/tests/other.cpp.o
+.PHONY : tests/other.cpp.o
+
+tests/other.i: tests/other.cpp.i
+
+.PHONY : tests/other.i
+
+# target to preprocess a source file
+tests/other.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/other.dir/build.make CMakeFiles/other.dir/tests/other.cpp.i
+.PHONY : tests/other.cpp.i
+
+tests/other.s: tests/other.cpp.s
+
+.PHONY : tests/other.s
+
+# target to generate assembly for a file
+tests/other.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/other.dir/build.make CMakeFiles/other.dir/tests/other.cpp.s
+.PHONY : tests/other.cpp.s
+
+tests/test1.o: tests/test1.cpp.o
+
+.PHONY : tests/test1.o
+
+# target to build an object file
+tests/test1.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/tests/test1.cpp.o
+.PHONY : tests/test1.cpp.o
+
+tests/test1.i: tests/test1.cpp.i
+
+.PHONY : tests/test1.i
+
+# target to preprocess a source file
+tests/test1.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/tests/test1.cpp.i
+.PHONY : tests/test1.cpp.i
+
+tests/test1.s: tests/test1.cpp.s
+
+.PHONY : tests/test1.s
+
+# target to generate assembly for a file
+tests/test1.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/tests/test1.cpp.s
+.PHONY : tests/test1.cpp.s
 
 # Help Target
 help:
@@ -163,9 +435,35 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... FirstLab"
-	@echo "... SecondLab"
+	@echo "... uninstall"
+	@echo "... Lab1"
+	@echo "... Lab2"
+	@echo "... Lab3"
+	@echo "... SDL2"
+	@echo "... SDL2-static"
+	@echo "... SDL2main"
+	@echo "... other"
+	@echo "... test1"
+	@echo "... Lab1/main.o"
+	@echo "... Lab1/main.i"
+	@echo "... Lab1/main.s"
+	@echo "... Lab2/main.o"
+	@echo "... Lab2/main.i"
+	@echo "... Lab2/main.s"
+	@echo "... Lab3/main.o"
+	@echo "... Lab3/main.i"
+	@echo "... Lab3/main.s"
+	@echo "... tests/other.o"
+	@echo "... tests/other.i"
+	@echo "... tests/other.s"
+	@echo "... tests/test1.o"
+	@echo "... tests/test1.i"
+	@echo "... tests/test1.s"
 .PHONY : help
 
 

@@ -33,13 +33,8 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab1/cmake_install.cmake")
-endif()
+  # Include the install script for each subdirectory.
 
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/Lab2/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

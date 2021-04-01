@@ -1,4 +1,11 @@
-*/cmake-build-debug/*
-.DS_Store
+# Clion
 .idea/
+cmake-build-debug/
+cmake-build-release/
 
+# Visual Studio
+.vs/
+out/
+
+# MacOS
+.DS_Store

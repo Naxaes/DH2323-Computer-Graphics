@@ -73,112 +73,293 @@ CMAKE_BINARY_DIR = /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/c
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: Lab1/all
-all: Lab2/all
+all: CMakeFiles/test1.dir/all
+all: CMakeFiles/Lab2.dir/all
+all: CMakeFiles/other.dir/all
+all: CMakeFiles/Lab3.dir/all
+all: CMakeFiles/Lab1.dir/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: Lab1/preinstall
-preinstall: Lab2/preinstall
+preinstall:
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: Lab1/clean
-clean: Lab2/clean
+clean: CMakeFiles/test1.dir/clean
+clean: CMakeFiles/Lab2.dir/clean
+clean: CMakeFiles/other.dir/clean
+clean: CMakeFiles/Lab3.dir/clean
+clean: CMakeFiles/Lab1.dir/clean
+clean: libraries/SDL2-2.0.14/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory Lab1
+# Directory level rules for directory libraries/SDL2-2.0.14
 
 # Recursive "all" directory target.
-Lab1/all: Lab1/CMakeFiles/FirstLab.dir/all
+libraries/SDL2-2.0.14/all: libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/all
+libraries/SDL2-2.0.14/all: libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/all
 
-.PHONY : Lab1/all
-
-# Recursive "preinstall" directory target.
-Lab1/preinstall:
-
-.PHONY : Lab1/preinstall
-
-# Recursive "clean" directory target.
-Lab1/clean: Lab1/CMakeFiles/FirstLab.dir/clean
-
-.PHONY : Lab1/clean
-
-#=============================================================================
-# Directory level rules for directory Lab2
-
-# Recursive "all" directory target.
-Lab2/all: Lab2/CMakeFiles/SecondLab.dir/all
-
-.PHONY : Lab2/all
+.PHONY : libraries/SDL2-2.0.14/all
 
 # Recursive "preinstall" directory target.
-Lab2/preinstall:
+libraries/SDL2-2.0.14/preinstall:
 
-.PHONY : Lab2/preinstall
+.PHONY : libraries/SDL2-2.0.14/preinstall
 
 # Recursive "clean" directory target.
-Lab2/clean: Lab2/CMakeFiles/SecondLab.dir/clean
+libraries/SDL2-2.0.14/clean: libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/clean
+libraries/SDL2-2.0.14/clean: libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/clean
+libraries/SDL2-2.0.14/clean: libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/clean
+libraries/SDL2-2.0.14/clean: libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/clean
 
-.PHONY : Lab2/clean
-
-#=============================================================================
-# Target rules for target Lab1/CMakeFiles/FirstLab.dir
-
-# All Build rule for target.
-Lab1/CMakeFiles/FirstLab.dir/all:
-	$(MAKE) $(MAKESILENT) -f Lab1/CMakeFiles/FirstLab.dir/build.make Lab1/CMakeFiles/FirstLab.dir/depend
-	$(MAKE) $(MAKESILENT) -f Lab1/CMakeFiles/FirstLab.dir/build.make Lab1/CMakeFiles/FirstLab.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target FirstLab"
-.PHONY : Lab1/CMakeFiles/FirstLab.dir/all
-
-# Build rule for subdir invocation for target.
-Lab1/CMakeFiles/FirstLab.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Lab1/CMakeFiles/FirstLab.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
-.PHONY : Lab1/CMakeFiles/FirstLab.dir/rule
-
-# Convenience name for target.
-FirstLab: Lab1/CMakeFiles/FirstLab.dir/rule
-
-.PHONY : FirstLab
-
-# clean rule for target.
-Lab1/CMakeFiles/FirstLab.dir/clean:
-	$(MAKE) $(MAKESILENT) -f Lab1/CMakeFiles/FirstLab.dir/build.make Lab1/CMakeFiles/FirstLab.dir/clean
-.PHONY : Lab1/CMakeFiles/FirstLab.dir/clean
+.PHONY : libraries/SDL2-2.0.14/clean
 
 #=============================================================================
-# Target rules for target Lab2/CMakeFiles/SecondLab.dir
+# Target rules for target CMakeFiles/test1.dir
 
 # All Build rule for target.
-Lab2/CMakeFiles/SecondLab.dir/all:
-	$(MAKE) $(MAKESILENT) -f Lab2/CMakeFiles/SecondLab.dir/build.make Lab2/CMakeFiles/SecondLab.dir/depend
-	$(MAKE) $(MAKESILENT) -f Lab2/CMakeFiles/SecondLab.dir/build.make Lab2/CMakeFiles/SecondLab.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target SecondLab"
-.PHONY : Lab2/CMakeFiles/SecondLab.dir/all
+CMakeFiles/test1.dir/all: libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num=100 "Built target test1"
+.PHONY : CMakeFiles/test1.dir/all
 
 # Build rule for subdir invocation for target.
-Lab2/CMakeFiles/SecondLab.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Lab2/CMakeFiles/SecondLab.dir/all
+CMakeFiles/test1.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 50
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test1.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
-.PHONY : Lab2/CMakeFiles/SecondLab.dir/rule
+.PHONY : CMakeFiles/test1.dir/rule
 
 # Convenience name for target.
-SecondLab: Lab2/CMakeFiles/SecondLab.dir/rule
+test1: CMakeFiles/test1.dir/rule
 
-.PHONY : SecondLab
+.PHONY : test1
 
 # clean rule for target.
-Lab2/CMakeFiles/SecondLab.dir/clean:
-	$(MAKE) $(MAKESILENT) -f Lab2/CMakeFiles/SecondLab.dir/build.make Lab2/CMakeFiles/SecondLab.dir/clean
-.PHONY : Lab2/CMakeFiles/SecondLab.dir/clean
+CMakeFiles/test1.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test1.dir/build.make CMakeFiles/test1.dir/clean
+.PHONY : CMakeFiles/test1.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Lab2.dir
+
+# All Build rule for target.
+CMakeFiles/Lab2.dir/all: libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num=1 "Built target Lab2"
+.PHONY : CMakeFiles/Lab2.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Lab2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 50
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Lab2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/Lab2.dir/rule
+
+# Convenience name for target.
+Lab2: CMakeFiles/Lab2.dir/rule
+
+.PHONY : Lab2
+
+# clean rule for target.
+CMakeFiles/Lab2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/clean
+.PHONY : CMakeFiles/Lab2.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/other.dir
+
+# All Build rule for target.
+CMakeFiles/other.dir/all: libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/other.dir/build.make CMakeFiles/other.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/other.dir/build.make CMakeFiles/other.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num=99 "Built target other"
+.PHONY : CMakeFiles/other.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/other.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 50
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/other.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/other.dir/rule
+
+# Convenience name for target.
+other: CMakeFiles/other.dir/rule
+
+.PHONY : other
+
+# clean rule for target.
+CMakeFiles/other.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/other.dir/build.make CMakeFiles/other.dir/clean
+.PHONY : CMakeFiles/other.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Lab3.dir
+
+# All Build rule for target.
+CMakeFiles/Lab3.dir/all: libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab3.dir/build.make CMakeFiles/Lab3.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab3.dir/build.make CMakeFiles/Lab3.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num= "Built target Lab3"
+.PHONY : CMakeFiles/Lab3.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Lab3.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 49
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Lab3.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/Lab3.dir/rule
+
+# Convenience name for target.
+Lab3: CMakeFiles/Lab3.dir/rule
+
+.PHONY : Lab3
+
+# clean rule for target.
+CMakeFiles/Lab3.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab3.dir/build.make CMakeFiles/Lab3.dir/clean
+.PHONY : CMakeFiles/Lab3.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Lab1.dir
+
+# All Build rule for target.
+CMakeFiles/Lab1.dir/all: libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab1.dir/build.make CMakeFiles/Lab1.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab1.dir/build.make CMakeFiles/Lab1.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num= "Built target Lab1"
+.PHONY : CMakeFiles/Lab1.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Lab1.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 49
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Lab1.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/Lab1.dir/rule
+
+# Convenience name for target.
+Lab1: CMakeFiles/Lab1.dir/rule
+
+.PHONY : Lab1
+
+# clean rule for target.
+CMakeFiles/Lab1.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lab1.dir/build.make CMakeFiles/Lab1.dir/clean
+.PHONY : CMakeFiles/Lab1.dir/clean
+
+#=============================================================================
+# Target rules for target libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir
+
+# All Build rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/all:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/depend
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num= "Built target uninstall"
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/all
+
+# Build rule for subdir invocation for target.
+libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/rule
+
+# Convenience name for target.
+uninstall: libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/rule
+
+.PHONY : uninstall
+
+# clean rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/clean
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/uninstall.dir/clean
+
+#=============================================================================
+# Target rules for target libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir
+
+# All Build rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/depend
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num=2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50 "Built target SDL2"
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all
+
+# Build rule for subdir invocation for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 49
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/rule
+
+# Convenience name for target.
+SDL2: libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/rule
+
+.PHONY : SDL2
+
+# clean rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/clean
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2.dir/clean
+
+#=============================================================================
+# Target rules for target libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir
+
+# All Build rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/all:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/depend
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num=51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98 "Built target SDL2-static"
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/all
+
+# Build rule for subdir invocation for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 48
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/rule
+
+# Convenience name for target.
+SDL2-static: libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/rule
+
+.PHONY : SDL2-static
+
+# clean rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/clean
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2-static.dir/clean
+
+#=============================================================================
+# Target rules for target libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir
+
+# All Build rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/all:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/depend
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles --progress-num= "Built target SDL2main"
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/all
+
+# Build rule for subdir invocation for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/tedkleinbergman/Programming/DH2323-Computer-Graphics/cmake-build-debug/CMakeFiles 0
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/rule
+
+# Convenience name for target.
+SDL2main: libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/rule
+
+.PHONY : SDL2main
+
+# clean rule for target.
+libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/build.make libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/clean
+.PHONY : libraries/SDL2-2.0.14/CMakeFiles/SDL2main.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
