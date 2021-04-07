@@ -43,6 +43,9 @@ struct Camera {
 const int SCREEN_WIDTH  = 100;
 const int SCREEN_HEIGHT = 100;
 
+vec3 light_position = vec3(0.0f, 1.0f, 0.0f);
+vec3 light_color    = 14.0f * vec3( 1, 1, 1 );
+
 
 // --------------------------------------------------------
 // FUNCTION DECLARATIONS
@@ -50,7 +53,7 @@ const int SCREEN_HEIGHT = 100;
 void Update(float dt, Camera& camera);
 void Draw(Window& window, const Camera& camera, const vector<Triangle>& triangles);
 bool ClosestIntersection(vec3 start, vec3 direction, const vector<Triangle>& triangles, Intersection& closest_intersection);
-
+vec3 DirectLight(const Triangle& triangle, const Intersection& intersection);
 
 
 // --------------------------------------------------------
@@ -140,10 +143,10 @@ void Update(float dt, Camera& camera)
 
 	const Uint8* key_state = SDL_GetKeyboardState(nullptr);
 
-	if (key_state[SDL_SCANCODE_UP])     {  }
-	if (key_state[SDL_SCANCODE_DOWN])   {  }
-	if (key_state[SDL_SCANCODE_LEFT])   {  }
-	if (key_state[SDL_SCANCODE_RIGHT])  {  }
+	if (key_state[SDL_SCANCODE_UP])     { light_position.z -= 1.0f * dt; }
+	if (key_state[SDL_SCANCODE_DOWN])   { light_position.z += 1.0f * dt; }
+	if (key_state[SDL_SCANCODE_LEFT])   { light_position.x -= 1.0f * dt; }
+	if (key_state[SDL_SCANCODE_RIGHT])  { light_position.x += 1.0f * dt; }
 	if (key_state[SDL_SCANCODE_RSHIFT]) { std::cout << "Pressing RSHIFT" << std::endl; }
 	if (key_state[SDL_SCANCODE_RCTRL])  { std::cout << "Pressing RCTRL"	 << std::endl; }
 	if (key_state[SDL_SCANCODE_W])      { camera.position.z -= 1.0f * dt; }
@@ -193,7 +196,9 @@ void Draw(Window& window, const Camera& camera, const vector<Triangle>& triangle
             if (ClosestIntersection(camera.position, direction, triangles, closest_intersection))
             {
                 auto triangle = triangles[closest_intersection.triangle_index];
-                window.set_pixel(x, y, triangle.color);
+//                window.set_pixel(x, y, triangle.color);
+                vec3 illumination = DirectLight(triangle, closest_intersection);
+                window.set_pixel(x, y, glm::clamp(illumination, BLACK, WHITE));
             }
             else
             {
@@ -246,4 +251,18 @@ bool ClosestIntersection(vec3 start, vec3 direction, const vector<Triangle>& tri
         return true;
     else
         return false;
+}
+
+
+vec3 DirectLight(const Triangle& triangle, const Intersection& intersection) {
+    vec3  rh = light_position - intersection.position;
+    float r = glm::length(rh);
+    vec3  n = glm::normalize(triangle.normal);
+    float A = float(4.0 * M_PI) * r*r;
+    vec3  P = light_color;
+    vec3  B = P / A;
+
+    vec3 D = B * glm::max(glm::dot(rh, n), 0.0f);
+
+    return D;
 }
