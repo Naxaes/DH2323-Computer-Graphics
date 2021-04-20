@@ -93,5 +93,28 @@ void Draw(Window& window, const vector<Triangle>& triangles)
 		vertices[2] = triangle.v2;
 
 		// Add drawing
+
+		for (int v = 0; v < 3; ++v)
+		{
+			ivec2 projPos;
+			/*for (int i = 0; i < 3; ++i)
+				std::cout << projPos[i];*/
+			VertexShader(vertices[v], projPos);
+			vec3 color(1, 1, 1);
+			std::cout << projPos.x << std::endl;
+			window.set_pixel(projPos.x, projPos.y, color);
+		}
+
+
 	}
+}
+
+void VertexShader(const vec3& v, ivec2& p)
+{
+	vec3 P = v - cameraPos;
+	float f = SCREEN_HEIGHT; //Given in the instructions
+	auto x = int(f * P.x / P.z + (SCREEN_WIDTH - 1) / 2.0f);
+	auto y = int(f * P.y / P.z + (SCREEN_HEIGHT - 1) / 2.0f);
+	p = glm::clamp(ivec2(x, y), ivec2(0,0), ivec2(SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1));
+
 }
