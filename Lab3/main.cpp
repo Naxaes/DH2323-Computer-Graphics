@@ -49,6 +49,7 @@ float depth_buffer[SCREEN_HEIGHT][SCREEN_WIDTH] = { 0 };
 // --------------------------------------------------------
 // FUNCTION DECLARATIONS
 
+
 void Draw(Window& window, const Camera& camera, const vector<Triangle>& triangles);
 void Update(Camera& camera, float dt);
 
