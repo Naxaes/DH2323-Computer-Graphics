@@ -1,5 +1,5 @@
 # DH2323 Project template
-This is a project template for the course DH2323 Computer Graphics and Interaction. It's for the first lab, and for lab 2 and 3 in the *Rendering* track.
+This is a created from [the project template](https://github.com/Naxaes/DH2323) for the course DH2323 Computer Graphics and Interaction by [Ted Klein Bergman](https://github.com/Naxaes/). It's for the first lab, and for lab 2 and 3 in the *Rendering* track.
 
 ## Setup
 
