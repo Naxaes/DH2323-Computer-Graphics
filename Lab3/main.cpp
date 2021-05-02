@@ -30,8 +30,6 @@ const vec3 indirect_light_power_per_area = 0.5f * vec3(1, 1, 1);
 
 struct Vertex {
     vec3 position;
-    vec3 normal;
-    vec2 reflectance;
 };
 
 
@@ -39,7 +37,7 @@ struct Pixel {
     int x;
     int y;
     float z_inv;
-    vec3  illumination;
+    vec3  position;
 };
 
 
@@ -64,6 +62,7 @@ float depth_buffer[SCREEN_HEIGHT][SCREEN_WIDTH] = { 0 };
 
 // --------------------------------------------------------
 // FUNCTION DECLARATIONS
+
 
 void Draw(Window& window, const Camera& camera, const vector<Triangle>& triangles);
 void Update(Camera& camera, float dt);
@@ -185,9 +184,9 @@ void Draw(Window& window, const Camera& camera, const vector<Triangle>& triangle
 	for (const auto& triangle : triangles)
 	{
 		vector<Pixel> polygon = {
-		        VertexShader(camera, Vertex { triangle.v0, triangle.normal, vec2(0) }),
-		        VertexShader(camera, Vertex { triangle.v1, triangle.normal, vec2(0) }),
-		        VertexShader(camera, Vertex { triangle.v2, triangle.normal, vec2(0) }),
+		        VertexShader(camera, Vertex { triangle.v0 }),
+		        VertexShader(camera, Vertex { triangle.v1 }),
+		        VertexShader(camera, Vertex { triangle.v2 }),
 		};
 
         vector<Pixel> pixels = Rasterize(polygon);
@@ -226,9 +225,9 @@ vector<Pixel> Interpolate(Pixel a, Pixel b)
     vector<Pixel> line(pixels);
 
 	auto step_a = vec3(stop - start) / float(glm::max(pixels - 1, 1));
-    auto step_b = vec3(b.illumination - a.illumination) / float(glm::max(pixels - 1, 1));
+    auto step_b = vec3(b.position - a.position) / float(glm::max(pixels - 1, 1));
 	vec3 current_a(start);
-    vec3 current_b(a.illumination);
+    vec3 current_b(a.position);
 	for (int i = 0; i < pixels; ++i)
 	{
         line[i] = Pixel { int(current_a.x), int(current_a.y), current_a.z, current_b };
@@ -246,18 +245,8 @@ Pixel VertexShader(const Camera& camera, const Vertex& v)
     auto x = int(f * p.x / p.z + (SCREEN_WIDTH  - 1) / 2.0f);
     auto y = int(f * p.y / p.z + (SCREEN_HEIGHT - 1) / 2.0f);
 
-    // Reflectance
-    const vec3  vertex_to_light    = light_position - v.position;
-    const vec3  direction_to_light = normalize(vertex_to_light);
-    const float radius = length(vertex_to_light);
-
-    const float factor = max(dot(direction_to_light, v.normal), 0.0f);
-
-    const vec3 specular = (factor * light_power) / (4.0f * float(M_PI) * radius * radius);
-    const vec3 illumination = specular + indirect_light_power_per_area;
-
     auto result = glm::clamp(ivec2(x, y), ivec2(0, 0), ivec2(SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1));
-    return { result.x, result.y, -1.0f / p.z, illumination };
+    return { result.x, result.y, -1.0f / p.z, p };
 }
 
 vector<Pixel> Rasterize(const vector<Pixel>& polygon)
@@ -275,7 +264,19 @@ vector<Pixel> Rasterize(const vector<Pixel>& polygon)
 void PixelShader(Window& window, const Pixel& pixel, const Triangle& triangle) {
     if (depth_buffer[pixel.y][pixel.x] < pixel.z_inv) {
         depth_buffer[pixel.y][pixel.x] = pixel.z_inv;
-        window.set_pixel(pixel.x, pixel.y, clamp(triangle.color * pixel.illumination, vec3(0), vec3(1)));
+
+        // Reflectance
+        const vec3  vertex_to_light    = light_position - pixel.position;
+        const vec3  direction_to_light = normalize(vertex_to_light);
+        const float radius = length(vertex_to_light);
+
+        const float factor = max(dot(direction_to_light, triangle.normal), 0.0f);
+
+        const vec3 specular = (factor * light_power) / (4.0f * float(M_PI) * radius * radius);
+        const vec3 illumination = specular + indirect_light_power_per_area;
+
+
+        window.set_pixel(pixel.x, pixel.y, clamp(triangle.color * illumination, vec3(0), vec3(1)));
     }
 }
 

@@ -54,6 +54,7 @@ vec3 indirectLight = 0.5f * vec3(1, 1, 1);
 // --------------------------------------------------------
 // FUNCTION DECLARATIONS
 
+
 void Update(float dt, Camera& camera);
 void Draw(Window& window, const Camera& camera, const vector<Triangle>& triangles);
 bool ClosestIntersection(vec3 start, vec3 direction, const vector<Triangle>& triangles, Intersection& closest_intersection);
