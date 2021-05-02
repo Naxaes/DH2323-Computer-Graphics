@@ -31,7 +31,7 @@ const vec3 MAGENTA = vec3(1.0f, 0.0f, 1.0f);
 /// Map from float in range [0, 1] to uint8 in range [0, 255].
 Uint8 MapFloatToUint8(float color)
 {
-	Assert(0.0f <= color && color <= 1.0039f, "Color value must be in range [0, 1], not %f.", color);
+	Assert(-0.0001f <= color && color <= 1.0039f, "Color value must be in range [0, 1], not %f.", color);
 	return static_cast<Uint8>(color * 255.0f);
 }
 

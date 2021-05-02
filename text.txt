@@ -1,0 +1,53 @@
+It's really important that the coordinates are sequential, i.e. doesn't skip
+any whole value, as that would result in black pixels. My intuition was that
+the following would work fine:
+
+```cpp
+float start = 124.0f;
+float stop  = 499.0f;
+float delta = stop - start;
+int   n     = abs(delta) + 1;
+
+for (int i = 0; i < n; ++i) {
+    float t = float(i) / float(n-1);  // Make `t` go from 0 to 1.
+    float v = (1.0f - t) * start  +  t * stop;
+    printf("%f, %d\n", v, int(v));
+}
+```
+
+However, due to the floating-point precision, I get:
+```
+124.000000, 124
+125.000000, 125
+126.000000, 126
+126.999992, 126  <- Wrong! Should be 127
+128.000000, 128
+...
+```
+
+What seem to work is doing in the following way instead:
+```cpp
+float start = 124.0f;
+float stop  = 499.0f;
+float delta = stop - start;
+int   n     = abs(delta) + 1;
+float step  = delta / float(n-1);
+
+float current = start;
+for (int i = 0; i < n; ++i) {
+    printf("%f, %d\n", current, int(current));
+    current += step;
+}
+```
+Gives:
+```
+124.000000, 124
+125.000000, 125
+126.000000, 126
+127.000000, 127
+128.000000, 128
+```
+
+But I feel that the first version should work fine (albeit with something
+changed) and that the second version is bad due to the fact it's accumulating
+the errors (which the first doesn't). Could someone shed some light on my issue?

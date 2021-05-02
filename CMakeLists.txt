@@ -91,7 +91,7 @@ endif()
 
 
 # ---- Add tests ----
-set(TESTS test1 other)  # Add the name of the files in `test/` separated with space.
+set(TESTS test1 interpolation)  # Add the name of the files in `test/` separated with space.
 
 FOREACH(test ${TESTS})
     add_executable(${test} tests/${test}.cpp)                 # Add source file.

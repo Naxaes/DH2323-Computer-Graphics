@@ -148,19 +148,31 @@ namespace details
         }
     };
 
-    void Failure(const Options& options, const std::string& statement, const int line, const TestCase& test_info, int checks)
+    void Failure(const Options& options, const std::string& statement, const int line, const TestCase& test_info, int checks, const std::string& message = "")
     {
-        fprintf(options.file,
-                "%s\t[Check %i failed]\n%s"
-                "\t\tStatement: %s\n"
-                "\t\tFile: %s\n"
-                "\t\tLine: %i\n", options.color->failure.data, checks, Colors::NORMAL.data, statement.c_str(), test_info.file, line
-        );
+        if (message.empty())
+            fprintf(options.file,
+                    "\n%s\t[Check %i failed]\n%s"
+                    "\t\tStatement: %s\n"
+                    "\t\tFile: %s\n"
+                    "\t\tLine: %i\n\t", options.color->failure.data, checks, Colors::NORMAL.data, statement.c_str(), test_info.file, line
+            );
+        else
+            fprintf(options.file,
+                    "\n%s\t[Check %i failed]\n%s"
+                    "\t\tMessage: %s\n"
+                    "\t\tStatement: %s\n"
+                    "\t\tFile: %s\n"
+                    "\t\tLine: %i\n\t", options.color->failure.data, checks, Colors::NORMAL.data, message.c_str(), statement.c_str(), test_info.file, line
+            );
     }
 
-    void Success(const Options& options, int checks)
+    void Success(const Options& options, int check)
     {
-        fprintf(options.file, "%s\t[check %i succeeded]\n%s", options.color->check.data, checks, Colors::NORMAL.data);
+        if (check % 64 == 1)
+            fprintf(options.file, "\n\t");
+
+        fprintf(options.file, "%s.%s", options.color->check.data, Colors::NORMAL.data);
     }
 
 
@@ -190,6 +202,7 @@ namespace details
     template <typename ... Targs>
     std::string Format(const char* format, const Targs ... args)
     {
+        // TODO: Leak
         char* statement = new char[MAX_BUFFER_SIZE];
         snprintf(statement, MAX_BUFFER_SIZE, format, ToString(args).c_str()...);
 
@@ -202,12 +215,12 @@ namespace details
         int failures = 0;
 
         if ((options.flags & Options::OUTPUT_TESTS) == Options::OUTPUT_TESTS)
-            fprintf(options.file, "%sStarting: %s\n%s", options.color->test.data, test.name, Colors::NORMAL.data);
+            fprintf(options.file, "%sStarting '%s'%s", options.color->test.data, test.name, Colors::NORMAL.data);
 
         test.function(options, test, checks, failures);
 
         if ((options.flags & Options::OUTPUT_TESTS) == Options::OUTPUT_TESTS)
-            fprintf(options.file, "%sCompleted %i out of %i\n%s", options.color->test.data, checks-failures, checks, Colors::NORMAL.data);
+            fprintf(options.file, "\n%sCompleted %i out of %i\n%s", options.color->test.data, checks-failures, checks, Colors::NORMAL.data);
 
         return {checks, failures};
     }
@@ -228,6 +241,36 @@ void test_##name(                                                               
         [[gnu::unused]] int& __checks,                                                                                  \
         [[gnu::unused]] int& __failures                                                                                 \
 )
+
+
+#define Checkf(a, comparison, b, format, ...)                                                                                         \
+{                                                                                                                       \
+    const auto value_a = a;  /* Must copy for rvalues of non pure function calls. */                                    \
+    const auto value_b = b;  /* Must copy for rvalues of non pure function calls. */                                    \
+                                                                                                                        \
+    bool status = value_a comparison value_b;                                                                           \
+                                                                                                                        \
+    __checks   += 1;                                                                                                    \
+    __failures += !status;                                                                                              \
+                                                                                                                        \
+    if ((options.flags & Options::OUTPUT_CHECKS) == Options::OUTPUT_CHECKS)                                             \
+    {                                                                                                                   \
+        if (status)                                                                                                     \
+            details::Success(options, __checks);                                                                        \
+        else                                                                                                            \
+            details::Failure(options,                                                                                   \
+                details::Format("%s " #comparison " %s \t (%s " #comparison " %s)", #a, #b, value_a, value_b),          \
+                __LINE__, __test_info, __checks, details::Format(format, __VA_ARGS__)                                                                         \
+                );                                                                                                      \
+    }                                                                                                                   \
+    else if ((options.flags & Options::OUTPUT_FAILURES) == Options::OUTPUT_FAILURES && !status)                         \
+    {                                                                                                                   \
+        details::Failure(options,                                                                                       \
+            details::Format("%s " #comparison " %s \t (%s " #comparison " %s)", #a, #b, value_a, value_b),              \
+            __LINE__, __test_info, __checks, details::Format(format, __VA_ARGS__)                                                                             \
+        );                                                                                                              \
+    }                                                                                                                   \
+}
 
 
 #define Check(a, comparison, b)                                                                                         \
